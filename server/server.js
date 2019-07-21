@@ -2,7 +2,7 @@ require('./config/config')
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const path = require('path');
 
 const app = express();
 
@@ -13,6 +13,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 //configuracion global de rutas
 app.use(require('./routes/index'));
+
+//habilitar middleware para la carpeta de public
+
+app.use(express.static( path.resolve(__dirname,'../public') ));
 
 app.get('/', function (req, res) {
   res.send('Hello World');
